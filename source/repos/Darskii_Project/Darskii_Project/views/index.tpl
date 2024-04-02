@@ -1,22 +1,3 @@
-<style>
-    button.exampleClass {
-        display: block;
-        margin: 0 auto;
-        background-color: #FFF; 
-        color: black; 
-        border: 2px solid black; 
-        padding: 10px 20px;
-        cursor: pointer;
-        transition: background-color 0.3s ease, transform 0.3s ease; 
-    }
-
-    button.exampleClass:hover {
-        background-color: #8CF8FF; 
-        transform: scale(1.2); /* увеличение размера на 20% */
-    }
-</style>
-
-
 % rebase('layout.tpl', title='Home Page', year=year)
 
 
@@ -48,13 +29,41 @@
         <p><a class="btn btn-default" href="http://azure.microsoft.com">Learn more &raquo;</a></p>
     </div>
 
-    <div style="display: inline-block; vertical-align: top;">
-        <h3> Ask a Question </h3>
-        <form action="/home" method="post">
-            <p><textarea rows="2" cols="50" name="QUEST" placeholder="Your question" style="resize:none;"></textarea></p> 
-            <p><input type="text" size="50" name="ADRESS" placeholder="Your email"></p>
-            <button type="submit" class="btn btn-default exampleClass">Send</button>
-        </form>
+   <div style="display: inline-block; vertical-align: top;">
+       <h3> Ask a Question</h3>
+           <form action="/home" method="post" onsubmit="return validateForm()">
+                <p><textarea id="questionInput" rows="2" cols="50" name="QUEST" placeholder="Your question" style="resize: none;" ></textarea></p>
+                <p><input id="nameInput" autocomplete="off" type="text" cols="50" name="NAME" placeholder="Your name" pattern="[A-Za-z\s]+" oninvalid="this.setCustomValidity('Please enter only Latin letters and spaces')" title="Format: Latin characters and spaces" oninput="this.setCustomValidity('')"></p>
+                <p><input id="emailInput" autocomplete="off" type="text" cols="50" name="ADRESS" placeholder="Your email" oninvalid="this.setCustomValidity('Invalid email address')" pattern="[a-zA-Z0-9]{1}[a-zA-Z0-9._\-]{4,29}[a-zA-Z0-9]{1}@(mail.ru|gmail.com|yandex.ru|inbox.ru|list.ru|bk.ru){1}" oninvalid="this.setCustomValidity('')" title="Invalid email address" oninput="this.setCustomValidity('')"></p>
+                <p><input type="submit" value="Send" class="btn btn-default"></p>
+           </form>
    </div>
+
+    
+   <script>
+
+        function validateForm(){
+            var questionValue = document.getElementById('questionInput').value;
+            var nameValue = document.getElementById('nameInput').value;
+            var emailValue = document.getElementById('emailInput').value;
+            if(questionValue.trim()===''){
+                alert('Please ask your question');
+                return false;
+            }
+
+            if(nameValue.trim()===''){
+                alert('Please fill in the name field');
+                return false;
+            }
+
+            if(emailValue.trim()===''){
+                alert('Please fill in the email field');
+                return false;
+            }
+            return true;
+        }
+
+   </script>
+
 
 </div>
