@@ -1,4 +1,24 @@
+<style>
+    button.exampleClass {
+        display: block;
+        margin: 0 auto;
+        background-color: #FFF; 
+        color: black; 
+        border: 2px solid black; 
+        padding: 10px 20px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease; 
+    }
+
+    button.exampleClass:hover {
+        background-color: #8CF8FF; 
+        transform: scale(1.2); /* увеличение размера на 20% */
+    }
+</style>
+
+
 % rebase('layout.tpl', title='Home Page', year=year)
+
 
 <div class="jumbotron">
     <img src = "static/images/logo_nav.png">
@@ -33,7 +53,7 @@
         <form action="/home" method="post">
             <p><textarea rows="2" cols="50" name="QUEST" placeholder="Your question" style="resize:none;"></textarea></p> 
             <p><input type="text" size="50" name="ADRESS" placeholder="Your email"></p>
-            <p><input type="submit" value="Send" class="btn btn-default"></p>
+            <button type="submit" class="btn btn-default exampleClass">Send</button>
         </form>
    </div>
 
