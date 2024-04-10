@@ -1,26 +1,20 @@
-from bottle import post, request, run, template
-import re
+from wsgiref import validate
+from xmlrpc.client import DateTime
+from bottle import post, request
 import datetime
+import pdb
 
-@post('/home', method='post')
+@post('/home', method='post')  # обработка post-запросов
+# функция для обработки post-запросов
 def my_form():
-    # Получение данных из формы
-    mail = request.forms.get('ADRESS')
-    question = request.forms.get('QUEST')
+    # получение значения параметра с именем NAME
     name = request.forms.get('NAME')
-    
-    # Проверка заполненности полей формы
-    if not mail or not question or not name:
-        return "Please fill in all the fields."
-
-    # Проверка адреса электронной почты
-    if not re.match(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", mail):
-        return "Invalid email address."
-
-    # Формирование даты обращения
-    access_date = datetime.datetime.now().strftime('%Y-%m-%d')
-
-    # Формирование результирующего сообщения
-    result_message = "Thanks, %s! The answer will be sent to the mail %s. Access Date: %s" % (name, mail, access_date)
-
-    return result_message
+    # получение значения параметра с именем ADRESS
+    mail = request.forms.get('ADRESS')
+    # получение занчения параметра с именем QUEST
+    question = request.forms.get('QUEST')
+    # создание словаря
+    questions = {mail : question}
+    pdb.set_trace()
+    # возвращаемое сообщение
+    return "Thanks, %s! The answer will be sent to the mail %s. Access date: %s" % (name, mail, datetime.date.today())
