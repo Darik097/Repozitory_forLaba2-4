@@ -34,7 +34,7 @@
            <form action="/home" method="post" onsubmit="return validateForm()">
                 <p><textarea id="questionInput" rows="2" cols="50" name="QUEST" placeholder="Your question" style="resize: none;" ></textarea></p>
                 <p><input id="nameInput" autocomplete="off" type="text" cols="50" name="NAME" placeholder="Your name" pattern="[A-Za-z\s]+" oninvalid="this.setCustomValidity('Please enter only Latin letters and spaces')" title="Format: Latin characters and spaces" oninput="this.setCustomValidity('')"></p>
-                <p><input id="emailInput" autocomplete="off" type="text" cols="50" name="ADRESS" placeholder="Your email" oninvalid="this.setCustomValidity('Invalid email address')" pattern="[a-zA-Z0-9]{1}[a-zA-Z0-9._\-]{4,29}[a-zA-Z0-9]{1}@(mail.ru|gmail.com|yandex.ru|inbox.ru|list.ru|bk.ru){1}" oninvalid="this.setCustomValidity('')" title="Invalid email address" oninput="this.setCustomValidity('')"></p>
+                <p><input id="emailInput" autocomplete="off" type="text" cols="50" name="ADRESS" placeholder="Your email" oninvalid="this.setCustomValidity('Invalid email address')" pattern="[a-zA-Z.\-_]{3,20}@[a-zA-Z]{3,10}(\.{1}[a-z]{2,5}){1,5}" oninvalid="this.setCustomValidity('')" title="Invalid email address" oninput="this.setCustomValidity('')"></p>
                 <p><input type="submit" value="Send" class="btn btn-default"></p>
            </form>
    </div>

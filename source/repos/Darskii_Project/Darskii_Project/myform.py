@@ -3,9 +3,13 @@ import datetime
 import json
 import re
 
+def validate_email(email):
+        # Проверка адреса электронной почты
+        pattern = r"[a-zA-Z.\-_]{3,20}@[a-zA-Z]{3,10}(\.{1}[a-z]{2,5}){1,5}"
+        return re.match(pattern, email)
+
 @post('/home', method='POST')  # обработка post-запросов
 def my_form():
-
     # получение значения параметра с именем NAME
     name = request.forms.get('NAME')
     # проверка наличия имени
@@ -17,9 +21,6 @@ def my_form():
     # проверка наличия почты
     if not mail:
         return "Email is required."
-        # Проверка адреса электронной почты
-    if not re.match(r"[a-zA-Z.\-_]{3,20}@[a-zA-Z]{3,10}(\.{1}[a-z]{2,5}){1,5}", mail):
-        return "Invalid email address."
 
 
     # получение занчения параметра с именем QUEST
@@ -47,17 +48,17 @@ def my_form():
     except:
         return "Unknown error"
 
-    # проверка на наличие почты в словаре
     if mail in questions:
         # вывод сообщения об ошибке, если имя отличается от указанного в словаре для данной почты
-        if name != questions[mail][0]:
+        if name.lower() != questions[mail][0].lower():
             return "Error! The name is different from the one you specified earlier!"
-        # добавление нового вопроса в список, если вопросы не совпадают
-        if question in questions[mail][1:]:
+        
+        # добавление нового вопроса в список, если вопросы не совпадают (с учетом регистра)
+        if question.lower() in [q.lower() for q in questions[mail][1:]]:
             return "Error! This question has already been asked."
         else:
             questions[mail].append(question)
-    # создание новой записи в словаре при отсуствии данной почты
+    # создание новой записи в словаре при отсутствии данной почты
     else:
         questions[mail] = [name, question]
 
