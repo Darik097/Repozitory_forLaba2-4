@@ -23,6 +23,7 @@
         <p>The Python Package Index is a repository of software for the Python programming language.</p>
         <p><a class="btn btn-default" href="https://pypi.python.org/pypi">Learn more &raquo;</a></p>
     </div>
+
     <div class="col-md-4">
         <h2>Microsoft Azure</h2>
         <p>You can easily publish to Microsoft Azure using Visual Studio. Find out how you can host your application using a free trial today.</p>
